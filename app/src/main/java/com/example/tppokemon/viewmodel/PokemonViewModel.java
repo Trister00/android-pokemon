@@ -38,7 +38,7 @@ public class PokemonViewModel extends ViewModel {
                 .map(new Function<ListPokemon, ArrayList<Pokemon>>() {
                     @Override
                     public ArrayList<Pokemon> apply(ListPokemon listPokemon) throws Throwable {
-                            ArrayList<Pokemon> list = listPokemon.getListPokemons();
+                            ArrayList<Pokemon> list = listPokemon.getResults();
                             for(Pokemon pokemon : list){
                                 String url = pokemon.getUrl();
                                 String[] pokemonIndex = url.split("/");

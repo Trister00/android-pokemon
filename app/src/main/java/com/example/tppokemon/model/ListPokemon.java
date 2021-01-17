@@ -6,13 +6,13 @@ public class ListPokemon {
     private int count;
     private String previous;
     private String next;
-    private ArrayList<Pokemon> listPokemons;
+    private ArrayList<Pokemon> results;
 
-    public ListPokemon(int count, String previous, String next, ArrayList<Pokemon> listPokemons) {
+    public ListPokemon(int count, String previous, String next, ArrayList<Pokemon> results) {
         this.count = count;
         this.previous = previous;
         this.next = next;
-        this.listPokemons = listPokemons;
+        this.results = results;
     }
 
     public int getCount() {
@@ -39,11 +39,11 @@ public class ListPokemon {
         this.next = next;
     }
 
-    public ArrayList<Pokemon> getListPokemons() {
-        return listPokemons;
+    public ArrayList<Pokemon> getResults() {
+        return results;
     }
 
-    public void setListPokemons(ArrayList<Pokemon> listPokemons) {
-        this.listPokemons = listPokemons;
+    public void setResults(ArrayList<Pokemon> listPokemons) {
+        this.results = listPokemons;
     }
 }
