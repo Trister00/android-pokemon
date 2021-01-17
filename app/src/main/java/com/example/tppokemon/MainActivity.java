@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.pokemon_recyclerView);
 
         pokemonAdapter = new PokemonAdapter(this);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
 
         recyclerView.setAdapter(pokemonAdapter);
 
