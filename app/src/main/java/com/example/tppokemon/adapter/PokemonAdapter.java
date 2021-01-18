@@ -22,9 +22,11 @@ import java.util.ArrayList;
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder> {
     private ArrayList<Pokemon> mList = new ArrayList<>();
     private Context mContext;
+    private RecyclerViewClickListner listner;
 
-    public PokemonAdapter(Context mContext) {
+    public PokemonAdapter(Context mContext, RecyclerViewClickListner listner) {
         this.mContext = mContext;
+        this.listner = listner;
     }
 
     @NonNull
@@ -56,13 +58,23 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         return mList.get(position);
     }
 
-    public class PokemonViewHolder extends RecyclerView.ViewHolder {
+    public class PokemonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView pokemonImage;
         private TextView pokemonName;
         public PokemonViewHolder(@NonNull View itemView) {
             super(itemView);
             pokemonImage = itemView.findViewById(R.id.pokemon_image);
             pokemonName = itemView.findViewById(R.id.pokemon_name);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            listner.onClick(v, getAdapterPosition());
+        }
+    }
+
+    public interface RecyclerViewClickListner {
+        void onClick(View v, int position);
     }
 }

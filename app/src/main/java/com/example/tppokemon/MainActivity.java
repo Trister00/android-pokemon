@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.tppokemon.adapter.PokemonAdapter;
 import com.example.tppokemon.model.Pokemon;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private PokemonViewModel viewModel;
     private RecyclerView recyclerView;
     private PokemonAdapter pokemonAdapter;
+    private PokemonAdapter.RecyclerViewClickListner listner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,18 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.pokemon_recyclerView);
 
-        pokemonAdapter = new PokemonAdapter(this);
+
+        listner = new PokemonAdapter.RecyclerViewClickListner() {
+            @Override
+            public void onClick(View v, int position) {
+                Intent intent = new Intent(getApplicationContext(),PokemonDetailsActivity.class);
+                intent.putExtra("pokemon",pokemonAdapter.getPokemonAt(position).getName());
+                startActivity(intent);
+            }
+        };
+
+
+        pokemonAdapter = new PokemonAdapter(this,listner);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
 
         recyclerView.setAdapter(pokemonAdapter);
