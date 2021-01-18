@@ -8,6 +8,6 @@ import retrofit2.http.GET;
 
 public interface IPokemonService {
 
-    @GET("pokemon")
+    @GET("pokemon?limit=151")
     Observable<ListPokemon> getPokemons();
 }
