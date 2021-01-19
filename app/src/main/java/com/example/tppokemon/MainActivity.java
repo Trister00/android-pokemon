@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.tppokemon.adapter.PokemonAdapter;
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v, int position) {
                 Intent intent = new Intent(getApplicationContext(),PokemonDetailsActivity.class);
-                intent.putExtra("pokemon",pokemonAdapter.getPokemonAt(position).getName());
+                intent.putExtra("pokemon_name",pokemonAdapter.getPokemonAt(position).getName());
+                intent.putExtra("pokemon_image",pokemonAdapter.getPokemonAt(position).getUrl());
                 startActivity(intent);
             }
         };
@@ -52,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(pokemonAdapter);
 
         viewModel = new ViewModelProvider(this).get(PokemonViewModel.class);
-
         viewModel.getPokemons();
         viewModel.getPokemonList().observe(this, new Observer<ArrayList<Pokemon>>() {
             @Override
