@@ -3,10 +3,16 @@ package com.example.tppokemon;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.tppokemon.model.PokemonDetails;
+import com.example.tppokemon.viewmodel.PokemonViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +29,8 @@ public class PokemonInfos extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
 
     public PokemonInfos() {
         // Required empty public constructor
@@ -53,12 +61,32 @@ public class PokemonInfos extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_pokemon_infos, container, false);
+
+        TextView pokemonHeight = (TextView) view.findViewById(R.id.pokemon_height);
+        TextView pokemonWeight = (TextView) view.findViewById(R.id.pokemon_weight);
+
+        TextView pokemonTypeOne = (TextView) view.findViewById(R.id.pokemon_type_1);
+        TextView pokemonTypeTwo = (TextView) view.findViewById(R.id.pokemon_type_2);
+
+        Bundle bundle = this.getArguments();
+
+        pokemonHeight.setText(bundle.getInt("height") + " m");
+        pokemonWeight.setText(bundle.getInt("weight") + " kg");
+        pokemonTypeOne.setText(bundle.getString("type_one"));
+        pokemonTypeTwo.setText(bundle.getString("type_two"));
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pokemon_infos, container, false);
+        return view;
+
+
+
+
+
     }
 }
