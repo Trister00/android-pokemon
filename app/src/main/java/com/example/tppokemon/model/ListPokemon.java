@@ -1,14 +1,20 @@
 package com.example.tppokemon.model;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "ListPokemon")
 public class ListPokemon {
 
+    @PrimaryKey(autoGenerate = true)
+    private int ID;
     @ColumnInfo(name = "count")
     private int count;
 
@@ -19,7 +25,10 @@ public class ListPokemon {
     private String next;
 
     @ColumnInfo(name = "results")
+    @Ignore
     private ArrayList<Pokemon> results;
+
+
 
     public ListPokemon(int count, String previous, String next, ArrayList<Pokemon> results) {
         this.count = count;
@@ -27,6 +36,7 @@ public class ListPokemon {
         this.next = next;
         this.results = results;
     }
+
 
     public int getCount() {
         return count;
@@ -58,5 +68,12 @@ public class ListPokemon {
 
     public void setResults(ArrayList<Pokemon> listPokemons) {
         this.results = listPokemons;
+    }
+    public int getID() {
+        return ID;
+    }
+    public void setID(int ID) {
+        this.ID = ID;
+
     }
 }

@@ -1,12 +1,15 @@
 package com.example.tppokemon.model;
 
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-
-@Entity
+@Entity(tableName = "Pokemon")
 public class Pokemon {
 
+    @PrimaryKey(autoGenerate = true)
+    private int ID;
     @ColumnInfo(name = "name")
     private String name;
 
@@ -32,5 +35,13 @@ public class Pokemon {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

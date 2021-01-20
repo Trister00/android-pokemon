@@ -16,7 +16,7 @@ import com.example.tppokemon.model.PokemonType;
 import com.example.tppokemon.model.Type;
 
 
-@Database(entities = {Pokemon.class, PokemonDetails.class, PokemonType.class, Type.class, Generation.class, ListGeneration.class, ListPokemon.class}, version = 1)
+@Database(entities = {Pokemon.class}, version = 2, exportSchema = false)
 public abstract class PokemonDatabase extends RoomDatabase {
     private static PokemonDatabase database;
     private static String DATABASE_NAME = "PokemonDB";

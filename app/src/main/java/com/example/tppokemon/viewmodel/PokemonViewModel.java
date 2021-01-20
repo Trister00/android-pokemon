@@ -14,9 +14,7 @@ import com.example.tppokemon.repository.Repository;
 
 import java.util.ArrayList;
 
-import io.reactivex.annotations.NonNull;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 

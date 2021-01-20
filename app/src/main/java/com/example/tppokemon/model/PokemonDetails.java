@@ -1,13 +1,20 @@
 package com.example.tppokemon.model;
 
+
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
 import java.util.List;
-@Entity
+
+@Entity(tableName = "PokemonDetails")
 public class PokemonDetails {
 
+    @PrimaryKey(autoGenerate = true)
+    private int ID;
     @ColumnInfo(name = "name")
     private String name;
 
@@ -17,15 +24,19 @@ public class PokemonDetails {
     @ColumnInfo(name = "weight")
     private int weight;
 
+    @Ignore
     @ColumnInfo(name = "types")
-    private List<PokemonType> types;
+    private ArrayList<PokemonType> types ;
 
-    public PokemonDetails(String name, int height, int weight, List<PokemonType> types) {
+
+    public PokemonDetails(String name, int height, int weight, ArrayList<PokemonType> types) {
         this.name = name;
         this.height = height;
         this.weight = weight;
         this.types = types;
     }
+
+
 
     public String getName() {
         return name;
@@ -51,11 +62,17 @@ public class PokemonDetails {
         this.weight = weight;
     }
 
-    public List<PokemonType> getTypes() {
+    public ArrayList<PokemonType> getTypes() {
         return types;
     }
 
-    public void setTypes(List<PokemonType> types) {
+    public void setTypes(ArrayList<PokemonType> types) {
         this.types = types;
+    }
+    public int getID() {
+        return ID;
+    }
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.tppokemon.adapter.PokemonAdapter;
+import com.example.tppokemon.database.PokemonDatabase;
 import com.example.tppokemon.model.Pokemon;
 import com.example.tppokemon.viewmodel.PokemonViewModel;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PokemonAdapter pokemonAdapter;
     private PokemonAdapter.RecyclerViewClickListner listner;
+    private PokemonDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.pokemon_recyclerView);
+        database = PokemonDatabase.getInstance(this);
 
 
         listner = new PokemonAdapter.RecyclerViewClickListner() {

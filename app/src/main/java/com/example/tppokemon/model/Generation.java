@@ -1,12 +1,16 @@
 package com.example.tppokemon.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 
-@Entity
+@Entity(tableName = "Generation")
 public class Generation {
 
+    @PrimaryKey(autoGenerate = true)
+    private int ID;
     @ColumnInfo(name = "name")
     private String name;
 
@@ -32,5 +36,11 @@ public class Generation {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+    public int getID() {
+        return ID;
+    }
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }
