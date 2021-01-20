@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/details"
+        android:enabled="true"
+        android:icon="@drawable/ic_details"
+        android:title="@string/details"/>
+    <item
+        android:id="@+id/evolutions"
+        android:enabled="true"
+        android:icon="@drawable/ic_evolutions"
+        android:title="@string/evolutions"/>
+</menu>

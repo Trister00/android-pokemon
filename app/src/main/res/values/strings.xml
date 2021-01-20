@@ -4,4 +4,8 @@
     <string name="taille">Taille : </string>
     <string name="poids">Poids : </string>
     <string name="types">Types :</string>
+    <string name="details">Details</string>
+    <string name="evolutions">Evolutions</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
