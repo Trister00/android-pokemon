@@ -1,8 +1,16 @@
 package com.example.tppokemon.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Pokemon {
 
+    @PrimaryKey
     private String name;
+
+    @ColumnInfo(name = "url")
     private String url;
 
     public Pokemon(String name, String url) {

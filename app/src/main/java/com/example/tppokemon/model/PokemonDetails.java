@@ -1,11 +1,23 @@
 package com.example.tppokemon.model;
 
-import java.util.List;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.util.List;
+@Entity
 public class PokemonDetails {
+
+    @PrimaryKey
     private String name;
+
+    @ColumnInfo(name = "height")
     private int height;
+
+    @ColumnInfo(name = "weight")
     private int weight;
+
+    @ColumnInfo(name = "types")
     private List<PokemonType> types;
 
     public PokemonDetails(String name, int height, int weight, List<PokemonType> types) {
