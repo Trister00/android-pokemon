@@ -2,12 +2,12 @@ package com.example.tppokemon.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+
 
 @Entity
 public class PokemonType {
 
-    @PrimaryKey
+    @ColumnInfo(name = "slot")
     private int slot;
 
     @ColumnInfo(name = "type")

@@ -1,11 +1,21 @@
 package com.example.tppokemon.model;
 
-import java.util.ArrayList;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
 
+import java.util.ArrayList;
+@Entity
 public class ListGeneration {
+    @ColumnInfo(name = "count")
     private int count;
+
+    @ColumnInfo(name = "previous")
     private String previous;
+
+    @ColumnInfo(name = "next")
     private String next;
+
+    @ColumnInfo(name = "results")
     private ArrayList<Generation> results;
 
     public  ListGeneration (int count, String previous, String next, ArrayList<Generation> results) {

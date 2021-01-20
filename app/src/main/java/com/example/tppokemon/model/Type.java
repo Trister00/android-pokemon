@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Type {
 
-    @PrimaryKey
+    @ColumnInfo(name = "name")
     private String name;
 
     @ColumnInfo(name = "url")

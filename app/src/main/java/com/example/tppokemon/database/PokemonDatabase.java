@@ -7,13 +7,16 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.tppokemon.model.Generation;
+import com.example.tppokemon.model.ListGeneration;
+import com.example.tppokemon.model.ListPokemon;
 import com.example.tppokemon.model.Pokemon;
 import com.example.tppokemon.model.PokemonDetails;
 import com.example.tppokemon.model.PokemonType;
 import com.example.tppokemon.model.Type;
 
 
-@Database(entities = {Pokemon.class, PokemonDetails.class, PokemonType.class, Type.class}, version = 1)
+@Database(entities = {Pokemon.class, PokemonDetails.class, PokemonType.class, Type.class, Generation.class, ListGeneration.class, ListPokemon.class}, version = 1)
 public abstract class PokemonDatabase extends RoomDatabase {
     private static PokemonDatabase database;
     private static String DATABASE_NAME = "PokemonDB";

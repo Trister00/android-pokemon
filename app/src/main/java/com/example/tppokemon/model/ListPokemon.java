@@ -2,10 +2,23 @@ package com.example.tppokemon.model;
 
 import java.util.ArrayList;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class ListPokemon {
+
+    @ColumnInfo(name = "count")
     private int count;
+
+    @ColumnInfo(name = "previous")
     private String previous;
+
+    @ColumnInfo(name = "next")
     private String next;
+
+    @ColumnInfo(name = "results")
     private ArrayList<Pokemon> results;
 
     public ListPokemon(int count, String previous, String next, ArrayList<Pokemon> results) {

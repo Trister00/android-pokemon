@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class PokemonDetails {
 
-    @PrimaryKey
+    @ColumnInfo(name = "name")
     private String name;
 
     @ColumnInfo(name = "height")
