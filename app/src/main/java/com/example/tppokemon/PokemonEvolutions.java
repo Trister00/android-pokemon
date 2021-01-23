@@ -3,10 +3,17 @@ package com.example.tppokemon;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.tppokemon.model.PokemonEvolution;
+import com.example.tppokemon.viewmodel.PokemonViewModel;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +66,23 @@ public class PokemonEvolutions extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pokemon_evolutions, container, false);
+        View view = inflater.inflate(R.layout.fragment_pokemon_evolutions, container, false);
+
+        PokemonViewModel viewModel = new ViewModelProvider(requireActivity()).get(PokemonViewModel.class);
+
+        Bundle bundle = this.getArguments();
+        String pokemonName = bundle.getString("pokemon_name");
+        System.out.println(pokemonName);
+
+        viewModel.getPokemonEvolutions(pokemonName);
+
+        viewModel.getPokemonEvolutions().observe(getViewLifecycleOwner(), new Observer<List<PokemonEvolution>>() {
+            @Override
+            public void onChanged(List<PokemonEvolution> pokemonEvolution) {
+                System.out.println(pokemonEvolution.get(0).getFamily().getEvolutionLine().toString() + "from api");
+            }
+        });
+
+        return view;
     }
 }

@@ -1,7 +1,9 @@
 package com.example.tppokemon.di;
 
+import com.example.tppokemon.http.IPokemonEvolutionsService;
 import com.example.tppokemon.http.IPokemonService;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -18,6 +20,7 @@ public class RetrofitModule {
 
     @Provides
     @Singleton
+    @Named("pokemon")
     public static IPokemonService providePokemonService(){
         return new Retrofit.Builder()
                 .baseUrl("https://pokeapi.co/api/v2/")
@@ -25,5 +28,17 @@ public class RetrofitModule {
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build()
                 .create(IPokemonService.class);
+    }
+
+    @Provides
+    @Singleton
+    @Named("evolution")
+    public static IPokemonEvolutionsService providePokemonEvolutionsService(){
+        return new Retrofit.Builder()
+                .baseUrl("https://pokeapi.glitch.me/v1/pokemon/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .build()
+                .create(IPokemonEvolutionsService .class);
     }
 }

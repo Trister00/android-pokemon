@@ -13,12 +13,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.example.tppokemon.model.Pokemon;
 import com.example.tppokemon.model.PokemonDetails;
 import com.example.tppokemon.viewmodel.PokemonViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -47,6 +44,8 @@ public class PokemonDetailsActivity extends AppCompatActivity implements BottomN
             @Override
             public void onChanged(PokemonDetails pokemonDetails) {
                 pokemonNameView.setText(pokemonDetails.getName());
+
+                bundle.putString("pokemon_name",pokemonName);
                 bundle.putInt("height",pokemonDetails.getHeight());
                 bundle.putInt("weight",pokemonDetails.getWeight());
                 bundle.putString("type_one",pokemonDetails.getTypes().get(0).getType().getName());
@@ -55,6 +54,8 @@ public class PokemonDetailsActivity extends AppCompatActivity implements BottomN
                 loadFragment(new PokemonInfos());
             }
         });
+
+
 
 
 
