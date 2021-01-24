@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.example.tppokemon.adapter.PokemonAdapter;
 import com.example.tppokemon.database.PokemonDatabase;
+import com.example.tppokemon.model.ListPokemon;
 import com.example.tppokemon.model.Pokemon;
 import com.example.tppokemon.viewmodel.PokemonViewModel;
 
@@ -57,12 +58,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(pokemonAdapter);
 
         viewModel = new ViewModelProvider(this).get(PokemonViewModel.class);
+
+        if(!database.pokemonDao().getAll().isEmpty()){
+            pokemonAdapter.setList((ArrayList)database.pokemonDao().getAll());
+        }
+        else {
         viewModel.getPokemons();
         viewModel.getPokemonList().observe(this, new Observer<ArrayList<Pokemon>>() {
             @Override
             public void onChanged(ArrayList<Pokemon> pokemons) {
                 pokemonAdapter.setList(pokemons);
+                pokemons.stream().forEach(pokemon ->database.pokemonDao().insert(pokemon));
             }
-        });
+        });}
     }
 }

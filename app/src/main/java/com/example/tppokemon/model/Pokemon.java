@@ -8,9 +8,7 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 
-@Entity(tableName = "Pokemon",
-        foreignKeys = @ForeignKey(entity = ListPokemon.class, parentColumns = "id", childColumns = "List_Pokemon_fk"),
-        indices = {@Index(value = {"id"}, unique = true),@Index(value = {"List_Pokemon_fk"})})
+@Entity(tableName = "Pokemon")
 public class Pokemon {
 
     @PrimaryKey(autoGenerate = true)
@@ -21,9 +19,6 @@ public class Pokemon {
 
     private String url;
 
-
-    @ColumnInfo(name = "List_Pokemon_fk")
-    private int listpokemonfk ;
 
     public Pokemon(String name, String url) {
         this.name = name;
@@ -54,7 +49,5 @@ public class Pokemon {
         this.id = id;
     }
 
-    public int getListpokemonfk() { return listpokemonfk; }
 
-    public void setListpokemonfk(int listpokemonfk) { this.listpokemonfk = listpokemonfk; }
 }

@@ -7,6 +7,7 @@ import androidx.room.Query;
 
 import com.example.tppokemon.model.Pokemon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -17,7 +18,7 @@ public interface PokemonDao {
     List<Pokemon> getAll();
 
     @Insert
-    void insertAll(Pokemon... pokemons);
+    void insert( Pokemon pokemon);
 
     @Delete
     void delete(Pokemon pokemon);
