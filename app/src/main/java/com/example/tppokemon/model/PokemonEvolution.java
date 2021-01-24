@@ -1,10 +1,28 @@
 package com.example.tppokemon.model;
 
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "PokemonEvolution" , indices = {@Index(value = {"id"}, unique = true)})
 public class PokemonEvolution {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private int id ;
     private String number;
     private String name;
+    @Ignore
     private Family family;
 
+
+    public PokemonEvolution(String number, String name) {
+        this.number = number;
+        this.name = name;
+    }
     public PokemonEvolution(String number, String name, Family family) {
         this.number = number;
         this.name = name;
@@ -33,5 +51,13 @@ public class PokemonEvolution {
 
     public void setFamily(Family family) {
         this.family = family;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

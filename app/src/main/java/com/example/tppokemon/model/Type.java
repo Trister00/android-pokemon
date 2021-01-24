@@ -3,18 +3,26 @@ package com.example.tppokemon.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName ="Type")
+
+@Entity(tableName = "Type",
+        foreignKeys = @ForeignKey(entity = PokemonType.class, parentColumns = "id", childColumns = "List_Type_fk"),
+        indices = {@Index(value = {"id"}, unique = true),@Index(value = {"List_Type_fk"})})
 public class Type {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     private int id;
-    @ColumnInfo(name = "name")
+
     private String name;
 
-    @ColumnInfo(name = "url")
+
     private String url;
+    @ColumnInfo(name = "List_Type_fk")
+    private int listtypefk ;
 
     public Type(String name, String url) {
         this.name = name;
@@ -36,12 +44,17 @@ public class Type {
     public void setUrl(String url) {
         this.url = url;
     }
+
     public int getId() {
         return id;
     }
-    public void setId(int ID) {
-        this.id = ID;
 
+    public void setId(int id) {
+        this.id = id;
     }
+
+    public int getListtypefk() { return listtypefk; }
+
+    public void setListtypefk(int listtypefk) { this.listtypefk = listtypefk; }
 }
 

@@ -8,27 +8,32 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "ListPokemon")
+@Entity(tableName = "ListPokemon" , indices = {@Index(value = {"id"}, unique = true)})
 public class ListPokemon {
 
     @PrimaryKey(autoGenerate = true)
-    private int ID;
-    @ColumnInfo(name = "count")
+    @ColumnInfo(name = "id")
+    private int id;
+
     private int count;
 
-    @ColumnInfo(name = "previous")
     private String previous;
 
-    @ColumnInfo(name = "next")
     private String next;
 
-    @ColumnInfo(name = "results")
+
     @Ignore
     private ArrayList<Pokemon> results;
 
 
+    public ListPokemon(int count, String previous, String next) {
+        this.count = count;
+        this.previous = previous;
+        this.next = next;
+    }
 
     public ListPokemon(int count, String previous, String next, ArrayList<Pokemon> results) {
         this.count = count;
@@ -69,11 +74,10 @@ public class ListPokemon {
     public void setResults(ArrayList<Pokemon> listPokemons) {
         this.results = listPokemons;
     }
-    public int getID() {
-        return ID;
-    }
-    public void setID(int ID) {
-        this.ID = ID;
 
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) { this.id = id; }
 }

@@ -5,30 +5,38 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(tableName = "ListGeneration")
+
+@Entity(tableName = "ListGeneration", indices = {@Index(value = {"id"}, unique = true)})
 public class ListGeneration {
 
     @PrimaryKey(autoGenerate = true)
-    private int ID;
-    @ColumnInfo(name = "count")
+    @ColumnInfo(name = "id")
+    private int id;
+
     private int count;
 
-    @ColumnInfo(name = "previous")
+
     private String previous;
 
-    @ColumnInfo(name = "next")
+
     private String next;
 
-    @ColumnInfo(name = "results")
+
     @Ignore
     private ArrayList<Generation> results;
 
+    public  ListGeneration (int count, String previous, String next) {
+        this.count = count;
+        this.previous = previous;
+        this.next = next;
 
+    }
     public  ListGeneration (int count, String previous, String next, ArrayList<Generation> results) {
         this.count = count;
         this.previous = previous;
@@ -67,12 +75,13 @@ public class ListGeneration {
     }
 
     public void setResults(ArrayList<Generation> listGenerations) { this.results = listGenerations; }
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-    public int getID() {
-        return ID;
+
+    public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
 }
