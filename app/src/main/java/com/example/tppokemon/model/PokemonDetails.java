@@ -13,6 +13,7 @@ import java.util.List;
 @Entity(tableName = "PokemonDetails")
 public class PokemonDetails {
 
+
     @PrimaryKey(autoGenerate = true)
     private int ID;
     @ColumnInfo(name = "name")
@@ -24,17 +25,22 @@ public class PokemonDetails {
     @ColumnInfo(name = "weight")
     private int weight;
 
+
     @Ignore
     @ColumnInfo(name = "types")
     private ArrayList<PokemonType> types ;
 
 
-    public PokemonDetails(String name, int height, int weight, ArrayList<PokemonType> types) {
+    public PokemonDetails(String name, int height, int weight, ArrayList<PokemonType> types) {}
+    public PokemonDetails(int id, String name, int height, int weight, List<PokemonType> types) {
+
         this.name = name;
         this.height = height;
         this.weight = weight;
-        this.types = types;
+        this.types = (ArrayList<PokemonType>) types;
     }
+
+
 
 
 

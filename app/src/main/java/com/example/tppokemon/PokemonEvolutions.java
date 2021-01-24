@@ -1,12 +1,39 @@
 package com.example.tppokemon;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.example.tppokemon.adapter.PokemonEvolutionsAdapter;
+import com.example.tppokemon.model.PokemonDetails;
+import com.example.tppokemon.model.PokemonEvolution;
+import com.example.tppokemon.repository.Repository;
+import com.example.tppokemon.viewmodel.PokemonViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.inject.Inject;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +86,47 @@ public class PokemonEvolutions extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pokemon_evolutions, container, false);
+        View view = inflater.inflate(R.layout.fragment_pokemon_evolutions, container, false);
+
+        PokemonViewModel viewModel = new ViewModelProvider(requireActivity()).get(PokemonViewModel.class);
+
+
+
+        Bundle bundle = this.getArguments();
+        String pokemonName = bundle.getString("pokemon_name");
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.pokemon_evolutions);
+        LinearLayoutManager layout = new LinearLayoutManager(getActivity());
+        layout.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(layout);
+
+        PokemonEvolutionsAdapter adapter = new PokemonEvolutionsAdapter(getActivity());
+
+        recyclerView.setAdapter(adapter);
+
+        ArrayList<String> urls = new ArrayList<>();
+
+
+
+
+        viewModel.getPokemonEvolutions(pokemonName);
+
+        viewModel.getPokemonEvolutions().observe(getViewLifecycleOwner(), new Observer<List<PokemonEvolution>>() {
+            @Override
+            public void onChanged(List<PokemonEvolution> pokemonEvolution) {
+                List<String> result = pokemonEvolution.get(0).getFamily().getEvolutionLine().stream().filter(pokemon -> !pokemon.toLowerCase().equals(pokemonName))
+                        .collect(Collectors.toList());
+                result.stream().forEach(pokemon -> {
+                    viewModel.getPokemonDetailsId(pokemon.toLowerCase())
+                    .subscribe(res -> {
+                        urls.add("https://cdn.traction.one/pokedex/pokemon/" + res.getId() +".png");
+                        adapter.setEvolutionUrls(urls);
+                    });
+                });
+
+            }
+        });
+
+        return view;
     }
 }
