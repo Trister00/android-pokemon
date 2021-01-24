@@ -1,6 +1,13 @@
 package com.example.tppokemon.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class CountGeneration {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private int gen1;
     private int gen2;
     private int gen3;
@@ -119,5 +126,8 @@ public class CountGeneration {
         this.gen7 = gen7;
     }
 
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 }
 

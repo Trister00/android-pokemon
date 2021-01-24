@@ -7,6 +7,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.tppokemon.model.CountGeneration;
 import com.example.tppokemon.model.Family;
 import com.example.tppokemon.model.Generation;
 import com.example.tppokemon.model.ListGeneration;
@@ -18,7 +19,7 @@ import com.example.tppokemon.model.PokemonType;
 import com.example.tppokemon.model.Type;
 
 
-@Database(entities = {Pokemon.class,ListGeneration.class,Generation.class,ListPokemon.class,Type.class,PokemonType.class,PokemonDetails.class, Family.class, PokemonEvolution.class}, version = 2, exportSchema = false)
+@Database(entities = {Pokemon.class,ListGeneration.class,Generation.class,ListPokemon.class,Type.class,PokemonType.class,PokemonDetails.class, Family.class, PokemonEvolution.class, CountGeneration.class}, version = 2, exportSchema = false)
 public abstract class PokemonDatabase extends RoomDatabase {
     private static PokemonDatabase database;
     private static String DATABASE_NAME = "PokemonDB";
