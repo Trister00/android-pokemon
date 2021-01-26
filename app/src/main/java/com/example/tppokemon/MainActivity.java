@@ -44,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
     private GenerationAdapter generationAdapter;
     private PokemonAdapter.RecyclerViewClickListner listner;
     private PokemonDatabase database;
+    private LinearLayoutManager layoutManager;
     private ArrayList<Generation> listGeneration = new ArrayList<Generation>();
+    private IPokemonService generation;
+    private Call<ListGeneration> baseGenerationCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +57,12 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.pokemon_recyclerView);
         recyclerViewballs = findViewById(R.id.generationballs);
         generationAdapter = new GenerationAdapter(this);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewballs.setLayoutManager(layoutManager);
         recyclerViewballs.setAdapter(generationAdapter);
         database = PokemonDatabase.getInstance(this);
+        generation = RetrofitModule.providePokemonService();
+        baseGenerationCall = generation.getListGeneration();
 
 
 
@@ -72,8 +77,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
 
-        IPokemonService generation = RetrofitModule.providePokemonService();
-        Call<ListGeneration> baseGenerationCall = generation.getListGeneration();
+
         baseGenerationCall.enqueue(new Callback<ListGeneration>() {
             @Override
             @EverythingIsNonNull
@@ -81,8 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 ListGeneration listGenerationn = response.body();
                 Log.e("popo", response.body().getResults().toString());
                 listGeneration = listGenerationn.getResults();
-                generationAdapter.AddGeneration(listGeneration);
-                //Log.d("Gen", listGenerationn.toString());
+                generationAdapter.setGenerationballs(listGeneration);
             }
 
             @Override
@@ -95,10 +98,6 @@ public class MainActivity extends AppCompatActivity {
         pokemonAdapter = new PokemonAdapter(this,listner);
 
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-
-
-
-
 
         recyclerView.setAdapter(pokemonAdapter);
 

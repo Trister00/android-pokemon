@@ -28,6 +28,9 @@ public class GenerationAdapter extends RecyclerView.Adapter<GenerationAdapter.Vi
     public GenerationAdapter (Context context){
         this.context = context;
     }
+
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -58,7 +61,7 @@ public class GenerationAdapter extends RecyclerView.Adapter<GenerationAdapter.Vi
         return generationballs.size();
     }
 
-    public void AddGeneration(ArrayList<Generation> list){
+    public void setGenerationballs(ArrayList<Generation> list){
         this.generationballs = list;
         notifyDataSetChanged();
     }
