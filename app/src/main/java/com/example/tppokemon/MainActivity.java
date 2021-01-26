@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
             @EverythingIsNonNull
             public void onResponse(Call<ListGeneration> call, Response<ListGeneration> response) {
                 ListGeneration listGenerationn = response.body();
-                Log.e("popo", response.body().getResults().toString());
                 listGeneration = listGenerationn.getResults();
                 generationAdapter.setGenerationballs(listGeneration);
             }
