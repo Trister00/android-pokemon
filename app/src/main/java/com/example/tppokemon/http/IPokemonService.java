@@ -33,8 +33,8 @@ public interface IPokemonService {
     @GET("pokemon/{pokemonId}")
     Observable<PokemonDetails> getPokemonDetails(@Path("pokemonId") String pokemonId);
 
-    @GET("api/v2/generation")
-    Observable<ListGeneration> getListGeneration();
+    @GET("generation")
+    Call<ListGeneration> getListGeneration();
 
 
 

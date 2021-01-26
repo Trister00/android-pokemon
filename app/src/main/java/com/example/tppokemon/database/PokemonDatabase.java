@@ -19,7 +19,7 @@ import com.example.tppokemon.model.PokemonType;
 import com.example.tppokemon.model.Type;
 
 
-@Database(entities = {Pokemon.class,ListGeneration.class,Generation.class,Type.class,PokemonType.class,PokemonDetails.class, Family.class, PokemonEvolution.class, CountGeneration.class}, version = 3, exportSchema = false)
+@Database(entities = {Pokemon.class,Type.class,PokemonType.class,PokemonDetails.class, Family.class, PokemonEvolution.class, CountGeneration.class}, version = 4, exportSchema = false)
 public abstract class PokemonDatabase extends RoomDatabase {
     private static PokemonDatabase database;
     private static String DATABASE_NAME = "PokemonDB";
@@ -42,8 +42,6 @@ public abstract class PokemonDatabase extends RoomDatabase {
 
     public abstract CountGenerationDao countGenerationDao();
     public abstract FamilyDao familyDao();
-    public abstract GenerationDao generationDao();
-    public abstract ListGenerationDao listGenerationDao();
     public abstract PokemonDao pokemonDao();
     public abstract PokemonDetailsDao pokemonDetailsDao();
     public abstract PokemonEvolutionDao pokemonEvolutionDao();

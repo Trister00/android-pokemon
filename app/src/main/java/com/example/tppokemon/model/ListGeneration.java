@@ -12,11 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity(tableName = "ListGeneration", indices = {@Index(value = {"id"}, unique = true)})
 public class ListGeneration {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
+
     private int id;
 
     private int count;
@@ -27,8 +25,6 @@ public class ListGeneration {
 
     private String next;
 
-
-    @Ignore
     private ArrayList<Generation> results;
 
     public  ListGeneration (int count, String previous, String next) {

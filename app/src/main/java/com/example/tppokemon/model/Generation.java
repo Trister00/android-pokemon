@@ -8,9 +8,7 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 
-@Entity(tableName = "Generation",
-        foreignKeys = @ForeignKey(entity = ListGeneration.class, parentColumns = "id", childColumns = "List_Generation_fk"),
-        indices = {@Index(value = {"id"}, unique = true),@Index(value = {"List_Generation_fk"})})
+
 public class Generation {
 
     @PrimaryKey(autoGenerate = true)
@@ -21,8 +19,7 @@ public class Generation {
     @ColumnInfo(name = "url")
     private String url;
 
-    @ColumnInfo(name = "List_Generation_fk")
-    private int listgenerationfk ;
+
 
     public Generation(String name, String url) {
         this.name = name;
@@ -30,7 +27,19 @@ public class Generation {
     }
 
     public String getName() {
-        return name;
+        switch(this.name){
+            case "generation-i": this.name = "Gen 1"; break;
+            case "generation-ii" : this.name = "Gen 2"; break;
+            case "generation-iii" : this.name = "Gen 3"; break;
+            case "generation-iv" : this.name = "Gen 4"; break;
+            case "generation-v" : this.name = "Gen 5"; break;
+            case "generation-vi" : this.name = "Gen 6"; break;
+            case "generation-vii" : this.name = "Gen 7"; break;
+            case "generation-viii" : this.name = "Gen 8"; break;
+            default: this.name="Gen 1";
+        }
+        return this.name;
+
     }
 
     public void setName(String name) {
@@ -53,8 +62,12 @@ public class Generation {
         this.id = id;
     }
 
-    public int getListgenerationfk() { return listgenerationfk; }
-
-    public void setListgenerationfk(int listgenerationfk) { this.listgenerationfk = listgenerationfk; }
-
+    @Override
+    public String toString() {
+        return "Generation{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

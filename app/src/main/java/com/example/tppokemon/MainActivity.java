@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -12,25 +13,38 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.tppokemon.adapter.GenerationAdapter;
 import com.example.tppokemon.adapter.PokemonAdapter;
 import com.example.tppokemon.database.PokemonDatabase;
+import com.example.tppokemon.di.RetrofitModule;
+import com.example.tppokemon.http.IPokemonService;
+import com.example.tppokemon.model.Generation;
+import com.example.tppokemon.model.ListGeneration;
 import com.example.tppokemon.model.ListPokemon;
 import com.example.tppokemon.model.Pokemon;
 import com.example.tppokemon.viewmodel.PokemonViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dagger.hilt.EntryPoint;
 import dagger.hilt.android.AndroidEntryPoint;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     private PokemonViewModel viewModel;
     private RecyclerView recyclerView;
+    private RecyclerView recyclerViewballs;
     private PokemonAdapter pokemonAdapter;
+    private GenerationAdapter generationAdapter;
     private PokemonAdapter.RecyclerViewClickListner listner;
     private PokemonDatabase database;
+    private ArrayList<Generation> listGeneration = new ArrayList<Generation>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +52,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.pokemon_recyclerView);
+        recyclerViewballs = findViewById(R.id.generationballs);
+        generationAdapter = new GenerationAdapter(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewballs.setLayoutManager(layoutManager);
+        recyclerViewballs.setAdapter(generationAdapter);
         database = PokemonDatabase.getInstance(this);
+
 
 
         listner = new PokemonAdapter.RecyclerViewClickListner() {
@@ -52,8 +72,33 @@ public class MainActivity extends AppCompatActivity {
         };
 
 
+        IPokemonService generation = RetrofitModule.providePokemonService();
+        Call<ListGeneration> baseGenerationCall = generation.getListGeneration();
+        baseGenerationCall.enqueue(new Callback<ListGeneration>() {
+            @Override
+            @EverythingIsNonNull
+            public void onResponse(Call<ListGeneration> call, Response<ListGeneration> response) {
+                ListGeneration listGenerationn = response.body();
+                Log.e("popo", response.body().getResults().toString());
+                listGeneration = listGenerationn.getResults();
+                generationAdapter.AddGeneration(listGeneration);
+                //Log.d("Gen", listGenerationn.toString());
+            }
+
+            @Override
+            public void onFailure(Call<ListGeneration> call, Throwable t) {
+
+            }
+
+        });
+
         pokemonAdapter = new PokemonAdapter(this,listner);
+
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+
+
+
+
 
         recyclerView.setAdapter(pokemonAdapter);
 
