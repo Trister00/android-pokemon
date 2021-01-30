@@ -114,11 +114,18 @@ public class MainActivity extends AppCompatActivity implements DataTransfer {
                 pokemonAdapter.setList(pokemons);
                 pokemons.stream().forEach(pokemon ->database.pokemonDao().insert(pokemon));
             }
-        });}
+        });
+    }
     }
     @Override
-    public void onSetValues(int position) {
-        Toast.makeText(this, "generation selected  ff " + position, Toast.LENGTH_SHORT).show();
-
+    public void onSetValues(int offset,int limit) {
+        viewModel.getPokemonsByGeneration(offset,limit);
+        viewModel.getPokemonList().observe(this, new Observer<ArrayList<Pokemon>>() {
+            @Override
+            public void onChanged(ArrayList<Pokemon> pokemons) {
+                pokemonAdapter.setList(pokemons);
+                pokemons.stream().forEach(pokemon ->database.pokemonDao().insert(pokemon));
+            }
+        });
     }
 }

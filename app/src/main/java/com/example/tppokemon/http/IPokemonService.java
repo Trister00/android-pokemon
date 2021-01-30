@@ -13,29 +13,18 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.Url;
 
 public interface IPokemonService {
 
     @GET("pokemon?limit=151")
     Observable<ListPokemon> getPokemons();
 
-    @GET("api/v2/pokemon")
-    Observable<Pokemon> getPokemons(
-            @Query("offset") int offset,
-            @Query("limit") int limit
-    );
-
-
-    @GET("/v1/pokemon/counts")
-    Call<CountGeneration> getCountGeneration();
+    @GET("pokemon")
+    Observable<ListPokemon> getPokemonsByGeneration(@Query("offset") int offset, @Query("limit") int limit);
 
     @GET("pokemon/{pokemonId}")
     Observable<PokemonDetails> getPokemonDetails(@Path("pokemonId") String pokemonId);
 
     @GET("generation")
     Call<ListGeneration> getListGeneration();
-
-
-
 }

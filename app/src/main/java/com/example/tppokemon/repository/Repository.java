@@ -29,6 +29,10 @@ public class Repository {
         return pokemonService.getPokemons();
     }
 
+    public Observable<ListPokemon> getPokemonsByGeneration(int offset, int limit){
+        return pokemonService.getPokemonsByGeneration(offset,limit);
+    }
+
     public Observable<PokemonDetails> getPokemonDetails(String pokemonId) {
         return pokemonService.getPokemonDetails(pokemonId);
     }

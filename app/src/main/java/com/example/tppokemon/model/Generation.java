@@ -28,17 +28,16 @@ public class Generation {
 
     public String getName() {
         switch(this.name){
-            case "generation-i": this.name = "Gen 1"; break;
-            case "generation-ii" : this.name = "Gen 2"; break;
-            case "generation-iii" : this.name = "Gen 3"; break;
-            case "generation-iv" : this.name = "Gen 4"; break;
-            case "generation-v" : this.name = "Gen 5"; break;
-            case "generation-vi" : this.name = "Gen 6"; break;
-            case "generation-vii" : this.name = "Gen 7"; break;
-            case "generation-viii" : this.name = "Gen 8"; break;
-            default: this.name="Gen 1";
+            case "generation-i": return "Gen 1";
+            case "generation-ii" : return "Gen 2";
+            case "generation-iii" : return "Gen 3";
+            case "generation-iv" : return"Gen 4";
+            case "generation-v" : return "Gen 5";
+            case "generation-vi" : return "Gen 6";
+            case "generation-vii" : return "Gen 7";
+            case "generation-viii" : return "Gen 8";
+            default:  return "Gen 1";
         }
-        return this.name;
 
     }
 

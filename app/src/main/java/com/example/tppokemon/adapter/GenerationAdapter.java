@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,12 +15,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.tppokemon.DataTransfer;
 import com.example.tppokemon.R;
 import com.example.tppokemon.model.Generation;
-import com.example.tppokemon.model.ListGeneration;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Callback;
 
 public class GenerationAdapter extends RecyclerView.Adapter<GenerationAdapter.ViewHolder> {
 
@@ -54,9 +49,10 @@ public class GenerationAdapter extends RecyclerView.Adapter<GenerationAdapter.Vi
         holder.ball.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = holder.getAdapterPosition();
-                Toast.makeText(context, "generation selected  " + position, Toast.LENGTH_SHORT).show();
-
+                int positionButton = holder.getAdapterPosition();
+                int offset = getOffsetAndLimit(generationballs.get(positionButton).getName())[0];
+                int limit = getOffsetAndLimit(generationballs.get(positionButton).getName())[1];
+                datatransfer.onSetValues(offset,limit);
 
             }
         });
@@ -81,6 +77,21 @@ public class GenerationAdapter extends RecyclerView.Adapter<GenerationAdapter.Vi
             ball = (ImageView) itemView.findViewById(R.id.picture);
             nom = (TextView) itemView.findViewById(R.id.nom);
 
+        }
+    }
+
+
+    private int[] getOffsetAndLimit(String name){
+        switch(name) {
+            case "Gen 1": return new int[]{0, 151};
+            case "Gen 2" : return new int[]{151, 100};
+            case "Gen 3" : return  new int[]{251, 135};
+            case "Gen 4" : return  new int[]{386, 107};
+            case "Gen 5" : return new int[]{493, 156};
+            case "Gen 6" : return new int[]{649, 72};
+            case "Gen 7" : return  new int[]{721, 86};
+            case "Gen 8" : return new int[]{807, 90};
+            default: return null;
         }
     }
 }
