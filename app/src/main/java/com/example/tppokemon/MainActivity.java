@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.tppokemon.adapter.GenerationAdapter;
 import com.example.tppokemon.adapter.PokemonAdapter;
@@ -35,7 +36,7 @@ import retrofit2.Response;
 import retrofit2.internal.EverythingIsNonNull;
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DataTransfer {
 
     private PokemonViewModel viewModel;
     private RecyclerView recyclerView;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.pokemon_recyclerView);
         recyclerViewballs = findViewById(R.id.generationballs);
-        generationAdapter = new GenerationAdapter(this);
+        generationAdapter = new GenerationAdapter(this, MainActivity.this);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewballs.setLayoutManager(layoutManager);
         recyclerViewballs.setAdapter(generationAdapter);
@@ -114,5 +115,10 @@ public class MainActivity extends AppCompatActivity {
                 pokemons.stream().forEach(pokemon ->database.pokemonDao().insert(pokemon));
             }
         });}
+    }
+    @Override
+    public void onSetValues(int position) {
+        Toast.makeText(this, "generation selected  ff " + position, Toast.LENGTH_SHORT).show();
+
     }
 }

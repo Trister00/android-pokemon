@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.tppokemon.DataTransfer;
 import com.example.tppokemon.R;
 import com.example.tppokemon.model.Generation;
 import com.example.tppokemon.model.ListGeneration;
@@ -25,8 +27,10 @@ public class GenerationAdapter extends RecyclerView.Adapter<GenerationAdapter.Vi
 
     public ArrayList<Generation> generationballs = new ArrayList<Generation>();
     public Context context;
-    public GenerationAdapter (Context context){
+    public DataTransfer datatransfer;
+    public GenerationAdapter (DataTransfer datatransfer, Context context){
         this.context = context;
+        this.datatransfer = datatransfer;
     }
 
 
@@ -50,6 +54,9 @@ public class GenerationAdapter extends RecyclerView.Adapter<GenerationAdapter.Vi
         holder.ball.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Toast.makeText(context, "generation selected  " + position, Toast.LENGTH_SHORT).show();
+
 
             }
         });
