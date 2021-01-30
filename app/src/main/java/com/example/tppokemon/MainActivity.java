@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.tppokemon.adapter.GenerationAdapter;
 import com.example.tppokemon.adapter.PokemonAdapter;
 import com.example.tppokemon.database.PokemonDatabase;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements DataTransfer {
     private IPokemonService generation;
     private Call<ListGeneration> baseGenerationCall;
 
+    private LottieAnimationView lottieAnimationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements DataTransfer {
         database = PokemonDatabase.getInstance(this);
         generation = RetrofitModule.providePokemonService();
         baseGenerationCall = generation.getListGeneration();
+
+        lottieAnimationView = findViewById(R.id.pokemon_load);
 
 
 
@@ -102,29 +107,35 @@ public class MainActivity extends AppCompatActivity implements DataTransfer {
         recyclerView.setAdapter(pokemonAdapter);
 
         viewModel = new ViewModelProvider(this).get(PokemonViewModel.class);
-
+//        lottieAnimationView.setVisibility(View.VISIBLE);
         if(!database.pokemonDao().getAll().isEmpty()){
             pokemonAdapter.setList((ArrayList)database.pokemonDao().getAll());
+            lottieAnimationView.setVisibility(View.GONE);
         }
         else {
+            lottieAnimationView.setVisibility(View.VISIBLE);
         viewModel.getPokemons();
         viewModel.getPokemonList().observe(this, new Observer<ArrayList<Pokemon>>() {
             @Override
             public void onChanged(ArrayList<Pokemon> pokemons) {
                 pokemonAdapter.setList(pokemons);
                 pokemons.stream().forEach(pokemon ->database.pokemonDao().insert(pokemon));
+                lottieAnimationView.setVisibility(View.GONE);
             }
         });
     }
     }
     @Override
     public void onSetValues(int offset,int limit) {
+        lottieAnimationView.setVisibility(View.VISIBLE);
         viewModel.getPokemonsByGeneration(offset,limit);
         viewModel.getPokemonList().observe(this, new Observer<ArrayList<Pokemon>>() {
             @Override
             public void onChanged(ArrayList<Pokemon> pokemons) {
+                lottieAnimationView.setVisibility(View.VISIBLE);
                 pokemonAdapter.setList(pokemons);
                 pokemons.stream().forEach(pokemon ->database.pokemonDao().insert(pokemon));
+                lottieAnimationView.setVisibility(View.GONE);
             }
         });
     }
