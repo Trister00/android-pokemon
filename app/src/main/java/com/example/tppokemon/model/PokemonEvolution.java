@@ -7,15 +7,13 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "PokemonEvolution" , indices = {@Index(value = {"id"}, unique = true)})
+
 public class PokemonEvolution {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
+
     private int id ;
     private String number;
     private String name;
-    @Ignore
     private Family family;
 
 

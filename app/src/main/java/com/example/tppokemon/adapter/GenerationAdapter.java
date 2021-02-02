@@ -52,7 +52,8 @@ public class GenerationAdapter extends RecyclerView.Adapter<GenerationAdapter.Vi
                 int positionButton = holder.getAdapterPosition();
                 int offset = getOffsetAndLimit(generationballs.get(positionButton).getName())[0];
                 int limit = getOffsetAndLimit(generationballs.get(positionButton).getName())[1];
-                datatransfer.onSetValues(offset,limit);
+                String generation = generationballs.get(positionButton).getName();
+                datatransfer.onSetValues(offset,limit,generation);
 
             }
         });

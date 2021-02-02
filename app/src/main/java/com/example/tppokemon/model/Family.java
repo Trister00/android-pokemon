@@ -10,18 +10,15 @@ import androidx.room.TypeConverters;
 import com.example.tppokemon.TypeConverterString;
 
 import java.util.List;
-@Entity(tableName = "Family",
-        foreignKeys = @ForeignKey(entity = PokemonEvolution.class, parentColumns = "id", childColumns = "List_Evolution_fk"),
-        indices = {@Index(value = {"id"}, unique = true),@Index(value = {"List_Evolution_fk"})})
+
 public class Family {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
+
     private int id;
     private int evolutionStage;
-    @TypeConverters(TypeConverterString.class)
+
     private List<String> evolutionLine;
-    @ColumnInfo(name = "List_Evolution_fk")
+
     private int listevolutionfk ;
 
     public Family(int id, int evolutionStage, List<String> evolutionLine) {

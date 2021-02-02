@@ -14,8 +14,8 @@ import java.util.List;
 public interface PokemonDao {
 
 
-    @Query("SELECT * FROM Pokemon")
-    List<Pokemon> getAll();
+    @Query("SELECT * FROM Pokemon where generation = :generation")
+    List<Pokemon> getAll(String generation);
 
     @Insert
     void insert( Pokemon pokemon);

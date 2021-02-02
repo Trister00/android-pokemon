@@ -1,10 +1,7 @@
 package com.example.tppokemon.http;
 
-import com.example.tppokemon.model.CountGeneration;
-import com.example.tppokemon.model.Generation;
 import com.example.tppokemon.model.ListGeneration;
 import com.example.tppokemon.model.ListPokemon;
-import com.example.tppokemon.model.Pokemon;
 import com.example.tppokemon.model.PokemonDetails;
 
 

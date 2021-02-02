@@ -12,25 +12,18 @@ import androidx.room.PrimaryKey;
 
 
 
-@Entity(tableName = "PokemonType",
-        foreignKeys = @ForeignKey(entity = PokemonDetails.class, parentColumns = "id", childColumns = "List_Details_fk"),
-        indices = {@Index(value = {"id"}, unique = true),@Index(value = {"List_Details_fk"})})
+
 public class PokemonType {
 
-    @PrimaryKey(autoGenerate = true)
+
     private int id;
-    @ColumnInfo(name = "slot")
+
     private int slot;
 
-    @ColumnInfo(name = "type")
-
-    @Ignore
     private Type type;
 
 
 
-    @ColumnInfo(name = "List_Details_fk")
-    private int listdetailsfk ;
 
 
     public PokemonType(int slot) {
@@ -67,7 +60,5 @@ public class PokemonType {
         this.id = id;
     }
 
-    public int getListdetailsfk() { return listdetailsfk; }
 
-    public void setListdetailsfk(int listdetailsfk) { this.listdetailsfk = listdetailsfk; }
 }

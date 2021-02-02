@@ -11,12 +11,10 @@ import java.util.ArrayList;
 
 
 
-@Entity(tableName = "PokemonDetails" , indices = {@Index(value = {"id"}, unique = true)})
 public class PokemonDetails {
 
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
+
     private int id;
 
     private String name;
@@ -25,7 +23,6 @@ public class PokemonDetails {
 
     private int weight;
 
-    @Ignore
     private ArrayList<PokemonType> types ;
 
 

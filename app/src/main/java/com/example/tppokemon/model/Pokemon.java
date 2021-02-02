@@ -20,9 +20,20 @@ public class Pokemon {
     private String url;
 
 
+
+    private String generation;
+
+
     public Pokemon(String name, String url) {
         this.name = name;
         this.url = url;
+    }
+    public String getGeneration() {
+        return generation;
+    }
+
+    public void setGeneration(String generation) {
+        this.generation = generation;
     }
 
     public String getName() {

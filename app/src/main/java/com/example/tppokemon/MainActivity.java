@@ -108,8 +108,9 @@ public class MainActivity extends AppCompatActivity implements DataTransfer {
 
         viewModel = new ViewModelProvider(this).get(PokemonViewModel.class);
 //        lottieAnimationView.setVisibility(View.VISIBLE);
-        if(!database.pokemonDao().getAll().isEmpty()){
-            pokemonAdapter.setList((ArrayList)database.pokemonDao().getAll());
+        if(!database.pokemonDao().getAll("Gen 1").isEmpty()){
+            Log.i("f"," sett");
+            pokemonAdapter.setList((ArrayList)database.pokemonDao().getAll("Gen 1"));
             lottieAnimationView.setVisibility(View.GONE);
         }
         else {
@@ -119,24 +120,49 @@ public class MainActivity extends AppCompatActivity implements DataTransfer {
             @Override
             public void onChanged(ArrayList<Pokemon> pokemons) {
                 pokemonAdapter.setList(pokemons);
-                pokemons.stream().forEach(pokemon ->database.pokemonDao().insert(pokemon));
+                pokemonAdapter.getmList().stream().forEach(pokemon ->{pokemon.setGeneration("Gen 1");
+                                                     database.pokemonDao().insert(pokemon);});
+                Log.d("myTag", "Gen1 set");
                 lottieAnimationView.setVisibility(View.GONE);
             }
         });
     }
     }
     @Override
-    public void onSetValues(int offset,int limit) {
+    public void onSetValues(int offset,int limit,String generation) {
         lottieAnimationView.setVisibility(View.VISIBLE);
-        viewModel.getPokemonsByGeneration(offset,limit);
-        viewModel.getPokemonList().observe(this, new Observer<ArrayList<Pokemon>>() {
-            @Override
-            public void onChanged(ArrayList<Pokemon> pokemons) {
-                lottieAnimationView.setVisibility(View.VISIBLE);
-                pokemonAdapter.setList(pokemons);
-                pokemons.stream().forEach(pokemon ->database.pokemonDao().insert(pokemon));
-                lottieAnimationView.setVisibility(View.GONE);
-            }
-        });
+        if(!database.pokemonDao().getAll(generation).isEmpty()){
+            Log.d("myTag", generation+ " get");
+            pokemonAdapter.setList((ArrayList)database.pokemonDao().getAll(generation));
+            System.out.println("pokemon -- : " +database.pokemonDao().getAll(generation).get(0).getGeneration()+ " --Pokemen Get " + database.pokemonDao().getAll(generation).get(0).getName());
+
+
+            lottieAnimationView.setVisibility(View.GONE);
+        }
+        else {
+            viewModel.getPokemonsByGeneration(offset, limit);
+            viewModel.getPokemonList().observe(this, new Observer<ArrayList<Pokemon>>() {
+                @Override
+                public void onChanged(ArrayList<Pokemon> pokemons) {
+                    lottieAnimationView.setVisibility(View.VISIBLE);
+                    pokemonAdapter.setList(pokemons);
+                    Log.i("f",generation+ " set");
+                    pokemonAdapter.getmList().stream().forEach(pokemon -> {
+                        pokemon.setGeneration(generation);
+                        database.pokemonDao().insert(pokemon);
+                    });
+                    System.out.println("pokemon -- : " +pokemonAdapter.getmList().get(0).getName()+ " --Pokemen sauvgarde");
+                    lottieAnimationView.setVisibility(View.GONE);
+
+                }
+            });
+        }
+    }
+    private ArrayList<Pokemon> getPokemonsFromDatabase(String generation){
+
+        return  (ArrayList<Pokemon>) database.pokemonDao().getAll(generation);
+    }
+    private  void  setPokemensDatabase (String generation, ArrayList<Pokemon> listPokemon){
+
     }
 }
