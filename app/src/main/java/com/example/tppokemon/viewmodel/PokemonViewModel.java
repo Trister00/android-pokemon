@@ -20,7 +20,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -64,8 +63,8 @@ public class PokemonViewModel extends ViewModel {
                         err -> Log.e("ViewModel",err.getMessage()));
     }
 
-    public void getPokemonsByGeneration(int offset,int limit){
-        repository.getPokemonsByGeneration(offset, limit).subscribeOn(Schedulers.io())
+    public @NonNull Observable<ArrayList<Pokemon>> getPokemonsByGeneration(int offset, int limit){
+        return repository.getPokemonsByGeneration(offset, limit).subscribeOn(Schedulers.io())
                 .map(new Function<ListPokemon, ArrayList<Pokemon>>() {
                     @Override
                     public ArrayList<Pokemon> apply(ListPokemon listPokemon) throws Throwable {
@@ -80,9 +79,7 @@ public class PokemonViewModel extends ViewModel {
                         return list;
                     }
                 })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(res -> pokemonList.setValue(res),
-                        err -> Log.e("ViewModel",err.getMessage()));
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     public void getPokemonDetails(String pokemonId){
