@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -28,6 +29,10 @@ public class PokemonDetailsActivity extends AppCompatActivity implements BottomN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pokemon_details);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
         TextView pokemonNameView = findViewById(R.id.pokemon_name);
         ImageView pokemonImage = findViewById(R.id.pokemon_image);
@@ -91,5 +96,11 @@ public class PokemonDetailsActivity extends AppCompatActivity implements BottomN
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
