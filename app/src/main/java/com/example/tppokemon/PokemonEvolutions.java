@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.tppokemon.adapter.PokemonEvolutionsAdapter;
 import com.example.tppokemon.model.PokemonDetails;
@@ -90,6 +91,8 @@ public class PokemonEvolutions extends Fragment {
 
         PokemonViewModel viewModel = new ViewModelProvider(requireActivity()).get(PokemonViewModel.class);
 
+        LottieAnimationView lottieAnimationView = view.findViewById(R.id.evolution_load);
+
 
 
         Bundle bundle = this.getArguments();
@@ -122,6 +125,7 @@ public class PokemonEvolutions extends Fragment {
                         urls.add("https://cdn.traction.one/pokedex/pokemon/" + res.getId() +".png");
                         adapter.setEvolutionUrls(urls);
                     });
+                    lottieAnimationView.setVisibility(View.GONE);
                 });
 
             }

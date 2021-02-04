@@ -4,8 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PokemonEvolutions">
+    tools:context=".PokemonEvolutions"
+    android:orientation="vertical">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/evolution_load"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_fileName="pokemon.json"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pokemon_evolutions"

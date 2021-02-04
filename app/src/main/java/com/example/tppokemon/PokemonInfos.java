@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.tppokemon.model.PokemonDetails;
 import com.example.tppokemon.viewmodel.PokemonViewModel;
 
@@ -69,6 +70,8 @@ public class PokemonInfos extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pokemon_infos, container, false);
 
+        LottieAnimationView lottieAnimationView = view.findViewById(R.id.infos_load);
+
         TextView pokemonHeight = (TextView) view.findViewById(R.id.pokemon_height);
         TextView pokemonWeight = (TextView) view.findViewById(R.id.pokemon_weight);
 
@@ -81,7 +84,9 @@ public class PokemonInfos extends Fragment {
         pokemonWeight.setText(bundle.getInt("weight") + " kg");
         pokemonTypeOne.setText(bundle.getString("type_one"));
         pokemonTypeTwo.setText(bundle.getString("type_two"));
-        // Inflate the layout for this fragment
+
+        lottieAnimationView.setVisibility(View.GONE);
+
         return view;
 
 
